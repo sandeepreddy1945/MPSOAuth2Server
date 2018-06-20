@@ -45,7 +45,7 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
 		// clients.jdbc(dataSource).build().loadClientByClientId("mpsadmin");
 
-		clients.inMemory().withClient("mpsguest").authorizedGrantTypes("implicit").scopes("read").autoApprove(false)
+		clients.inMemory().withClient("mpsguestuser").authorizedGrantTypes("implicit").scopes("read").autoApprove(false)
 				.accessTokenValiditySeconds(3600000).redirectUris("http://localhost:8081/")
 
 				.and().withClient("mpsadminuser").secret(passwordEncoder().encode("secret"))
