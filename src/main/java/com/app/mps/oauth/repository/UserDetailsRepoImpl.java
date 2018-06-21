@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.app.mps.oauth.security.model.Authority;
 import com.app.mps.oauth.security.model.User;
 
 /**
@@ -71,6 +72,15 @@ public class UserDetailsRepoImpl implements UserDetailsRepo {
 		session.getNamedQuery("@deleteUserById").setParameter("userId", userId).executeUpdate();
 		session.getTransaction().commit();
 		return userId;
+	}
+
+	@Override
+	public List<Authority> listAllAuthorities() {
+		Session session = entityManager.unwrap(Session.class);
+		session.beginTransaction();
+		Query query = session.createNamedQuery("@listAllAuthorities");
+		session.getTransaction().commit();
+		return query.getResultList();
 	}
 
 }

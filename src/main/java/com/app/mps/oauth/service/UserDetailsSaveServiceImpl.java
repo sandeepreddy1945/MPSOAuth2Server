@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.mps.oauth.repository.UserDetailsRepo;
+import com.app.mps.oauth.security.model.Authority;
 import com.app.mps.oauth.security.model.User;
 
 /**
@@ -47,6 +48,12 @@ public class UserDetailsSaveServiceImpl implements UserDetailsSaveService {
 	public Long deleteUser(Long userId) {
 		
 		return usr.deleteUser(userId);
+	}
+
+	@Override
+	public List<Authority> listAllAuthorities() {
+
+		return usr.listAllAuthorities();
 	}
 
 }

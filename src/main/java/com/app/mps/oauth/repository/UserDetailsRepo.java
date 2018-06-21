@@ -5,6 +5,7 @@ package com.app.mps.oauth.repository;
 
 import java.util.List;
 
+import com.app.mps.oauth.security.model.Authority;
 import com.app.mps.oauth.security.model.User;
 
 /**
@@ -22,4 +23,6 @@ public interface UserDetailsRepo {
 	public User deleteUser(User user);
 
 	public Long deleteUser(Long userId);
+	
+	public List<Authority> listAllAuthorities();
 }

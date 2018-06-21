@@ -45,7 +45,8 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
 		// clients.jdbc(dataSource).build().loadClientByClientId("mpsadmin");
 
-		clients.inMemory().withClient("mpsguestuser").authorizedGrantTypes("implicit").scopes("read").autoApprove(false)
+		clients.inMemory().withClient("mpsguestuser").secret(passwordEncoder().encode("secret"))
+				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("read")
 				.accessTokenValiditySeconds(3600000).redirectUris("http://localhost:8081/")
 
 				.and().withClient("mpsadminuser").secret(passwordEncoder().encode("secret"))
@@ -63,8 +64,8 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 				.refreshTokenValiditySeconds(2592000) // 30 days
 
 				.and().withClient("mpstestuser").secret(passwordEncoder().encode("secret"))
-				.authorizedGrantTypes("implicit").scopes("admin", "read", "write", "update").autoApprove(true)
-				.redirectUris("xxx");
+				.authorizedGrantTypes("password", "authorization_code", "implicit")
+				.scopes("admin", "read", "write", "update").autoApprove(true).redirectUris("xxx");
 
 	}
 
