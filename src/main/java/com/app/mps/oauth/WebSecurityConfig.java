@@ -20,10 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PasswordEncoder userPasswordEncoder;
 
-	/*
-	 * @AutowiredF private BCryptPasswordEncoder passwordEncoder;
-	 */
-
 	@Autowired
 	public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
 		// @formatter:off

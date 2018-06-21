@@ -19,3 +19,4 @@ spring:
         format_sql: true
         id:
           new_generator_mappings: true
+host: localhost

@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -36,7 +35,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 	public void configure(final HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 				.anyRequest().authenticated().and().httpBasic().realmName("TEST_REALM")
-				.authenticationEntryPoint(basicAuth()).and().authorizeRequests().antMatchers("/employee")
+				.authenticationEntryPoint(basicAuth()).and().authorizeRequests().antMatchers("/employee", "/api/**")
 				.authenticated();
 
 	}
