@@ -32,3 +32,4 @@ bin/main/mytest.jks
 bin/main/persistence.properties
 bin/main/schema.sql
 bin/main/static/application.properties
+bin/main/static/data.sql

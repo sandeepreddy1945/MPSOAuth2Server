@@ -32,9 +32,15 @@ public class UserDetailsRepoImpl implements UserDetailsRepo {
 		session.beginTransaction();
 		// encode the password before saving it.
 		user.setPassword(passEncoder.encode(user.getPassword()));
-		session.save(user);
-		session.getTransaction().commit();
-		return user;
+		if (isUserExists(user, session)) {
+			// if user already exists then donot add him again but just re-send the details
+			// back.
+			return user;
+		} else {
+			session.save(user);
+			session.getTransaction().commit();
+			return user;
+		}
 	}
 
 	@Override
@@ -81,6 +87,12 @@ public class UserDetailsRepoImpl implements UserDetailsRepo {
 		Query query = session.createNamedQuery("@listAllAuthorities");
 		session.getTransaction().commit();
 		return query.getResultList();
+	}
+
+	private boolean isUserExists(User user, Session session) {
+		Query query = session.createNamedQuery("from User u where u.username = :username").setParameter("username",
+				user.getUsername());
+		return query.getResultList() == null ? false : query.getResultList().size() > 0 ? true : false;
 	}
 
 }
