@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +57,7 @@ public class MPSUserRest {
 	@GetMapping(path = "/api/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ApiOperation(value = "End Point to Fetch Users List")
+	@PreAuthorize(value = "")
 	public ResponseEntity<String> fetchAllUsers() throws JsonProcessingException {
 		List<User> users = uds.fetchAllUsers();
 		return new ResponseEntity<String>(mapper.writeValueAsString(users), HttpStatus.OK);

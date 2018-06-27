@@ -129,7 +129,7 @@ public class SwaggerConfig {
 	 * @return
 	 */
 	private String buildAuthUrl() {
-		return "http://" + host + ":" + serverPort + "/" + contextPath + "/oauth";
+		return "http://" + host + ":" + serverPort  + contextPath + "/oauth";
 	}
 
 }
