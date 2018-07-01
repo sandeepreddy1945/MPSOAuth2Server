@@ -46,21 +46,20 @@ public class MPSUserRest {
 	@PostMapping(path = "/api/user/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ApiOperation(value = "End Point To Add User using Basic Auth")
-	public ResponseEntity<String> addUser(@RequestBody String user) throws IOException {
+	public ResponseEntity<User> addUser(@RequestBody User user2) throws IOException {
 
-		User user2 = mapper.readerFor(User.class).readValue(user);
 		user2 = uds.saveUser(user2);
 
-		return new ResponseEntity<String>(mapper.writeValueAsString(user2), HttpStatus.CREATED);
+		return new ResponseEntity<User>(user2, HttpStatus.CREATED);
 	}
 
 	@GetMapping(path = "/api/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	@ApiOperation(value = "End Point to Fetch Users List")
 	@PreAuthorize(value = "")
-	public ResponseEntity<String> fetchAllUsers() throws JsonProcessingException {
+	public ResponseEntity<List<User>> fetchAllUsers() throws JsonProcessingException {
 		List<User> users = uds.fetchAllUsers();
-		return new ResponseEntity<String>(mapper.writeValueAsString(users), HttpStatus.OK);
+		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 
 	@DeleteMapping(path = "/api/user/delete")
@@ -83,9 +82,9 @@ public class MPSUserRest {
 	@PostMapping(path = "/api/user/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Update User End Point. Updates USer By User Details.")
 	@ResponseBody
-	public ResponseEntity<String> updateUser(@RequestBody String user) throws IOException {
-		User user2 = mapper.readerFor(User.class).readValue(user);
-		uds.updateUser(user2);
-		return new ResponseEntity<String>(mapper.writeValueAsString(user2), HttpStatus.OK);
+	public ResponseEntity<User> updateUser(@RequestBody User user) throws IOException {
+
+		uds.updateUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 }

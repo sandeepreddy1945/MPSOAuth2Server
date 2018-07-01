@@ -39,7 +39,8 @@ import lombok.Setter;
 @JsonPropertyOrder({ "id", "username", "password", "accountExpired", "accountLocked", "credentialsExpired", "enabled",
 		"authorities" })
 @NamedQueries({ @NamedQuery(name = "@listAllUsers", query = "from User u"),
-		@NamedQuery(name = "@deleteUserById", query = "delete from User u where u.id = :userId") })
+		@NamedQuery(name = "@deleteUserById", query = "delete from User u where u.id = :userId"),
+		@NamedQuery(name = "@checkForUser", query = "from User u where u.username = :username") })
 public class User implements UserDetails, Serializable {
 
 	/**

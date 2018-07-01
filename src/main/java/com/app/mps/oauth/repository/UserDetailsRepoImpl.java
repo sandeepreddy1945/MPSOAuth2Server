@@ -90,7 +90,7 @@ public class UserDetailsRepoImpl implements UserDetailsRepo {
 	}
 
 	private boolean isUserExists(User user, Session session) {
-		Query query = session.createNamedQuery("from User u where u.username = :username").setParameter("username",
+		Query query = session.createNamedQuery("@checkForUser").setParameter("username",
 				user.getUsername());
 		return query.getResultList() == null ? false : query.getResultList().size() > 0 ? true : false;
 	}
